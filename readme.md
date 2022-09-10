@@ -7,4 +7,4 @@ To do
 // change background + sprites + particles
 // add first level boss
 // add platforms
-// add 
+// add projectile attack to player
