@@ -6,6 +6,7 @@ const app = express();
 app.use(express.json());
 app.use('/dist', express.static('dist'));
 app.use('/assets', express.static('assets'));
+app.use('/styles.css'), express.static('styles.css');
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './index.html'))
