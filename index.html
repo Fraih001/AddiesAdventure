@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="end">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="'X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Addie's Adventures!</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+    <body>
+            <canvas id="canvas1" style="display:none"></canvas>
+            <button id="backtomenu" style="display:none">Back to Menu</button>
+
+        <div id="start-screen">
+            <h2 id="title">Addie's Adventures</h2>
+            <div id="playcontrols">
+                <div id="play">
+                    <h3 id="howtoplay">How To Play</h3>
+                    <div class="howtoplay"> You Have 30 Seconds to Score 30 Points!</div>
+                    <div class="howtoplay"> For every monster you hit, you gain 1 point.</div>
+                    <div class="howtoplay"> If you get hit, you lose 2 points and a life.</div>
+                </div>
+                <div id="controls">
+                    <h4> Controls </h4>
+                    <div class="controls">Left and Right to Run, Up to Jump, Down to Sit</div>
+                    <div class="controls">Shift to Attack</div>
+                    <div class="controls">Special Move: Press and hold Down while in the air</div>
+                </div>
+            </div>
+            <button id="startgame">Start Game</button>
+        </div>
+     
+        <img id="player" src="./assets/player.png">
+        <img id="layer5" src="./assets/forest-5.png">
+        <img id="layer4" src="./assets/forest-4.png">
+        <img id="layer3" src="./assets/forest-3.png">
+        <img id="layer2" src="./assets/forest-2.png">
+        <img id="layer1" src="./assets/forest-1.png">
+        <img id="enemy_fly" src="./assets/enemy_fly.png">
+        <img id="enemy_plant" src="./assets/enemy_plant.png">
+        <img id="enemy_spider_big" src="./assets/enemy_spider_big.png">
+        <img id="fire" src="./assets/fire.png">
+        <img id="boom" src="./assets/boom.png">
+        <img id="lives" src="./assets/lives.png">
+        <script type='module' src="main.js"></script>
+
+    </body>
+</html>

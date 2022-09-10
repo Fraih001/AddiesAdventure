@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: black;
+    color: white;
+    font-family: 'Creepster', cursive
+}
+
+#start-screen {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#title {
+    padding-top: 150px;
+    padding-bottom: 30px;
+    font-size: 100px;
+}
+
+#howtoplay {
+    color: darkred;
+    font-size: 50px;
+    padding: 15px;
+}
+
+.howtoplay {
+    font-size: 30px;
+    padding: 10px;
+}
+
+h4 {
+    color: darkred;
+    font-size: 50px;;
+    padding: 15px;
+}
+
+.controls {
+    font-size: 30px;
+    padding: 10px;
+}
+
+#playcontrols {
+    display: flex;
+}
+
+#play {
+    padding: 10px;
+}
+
+#controls {
+    text-align: left;
+    padding: 10px;
+}
+
+#canvas1 {
+    border: 5px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+    font-family: 'Creepster', cursive;
+}
+
+button {
+    color: darkred;
+    margin-top: 50px;
+    padding: 50px;
+    font-size: 50px;
+}
+
+#backtomenu {
+    padding:10px;
+    margin-left: 50px;
+    font-size: 40px;
+}
+
+#player, #layer1, #layer2, #layer3, #layer4, #layer5, #enemy_fly, #enemy_plant, #enemy_spider_big, #fire, #boom, #lives {
+    display: none;
+}
