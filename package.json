@@ -4,6 +4,10 @@
   "description": "Created this after completing the Canvas Master Class on Frank's Laboratory YouTube Channel. https://www.youtube.com/c/Frankslaboratory",
   "main": "main.js",
   "scripts": {
+    "start": "node server",
+    "build": "webpack",
+    "start:dev": "--ignore dist/ & npm run build:dev",
+    "build:dev": "npm run build -- --watch --mode=development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
