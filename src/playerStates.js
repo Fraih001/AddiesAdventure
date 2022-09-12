@@ -29,7 +29,7 @@ export class Sitting extends State{
     handleInput(input){
         if (input.includes('ArrowLeft') || input.includes('ArrowRight')){
             this.game.player.setState(states.RUNNING, 1);
-        } else if (input.includes('Shift')){
+        } else if (input.includes('Shift') && this.game.ammo > 15){
             this.game.player.setState(states.ROLLING, 2);
         }
     }
@@ -50,7 +50,7 @@ export class Running extends State{
             this.game.player.setState(states.SITTING, 0);
         } else if (input.includes('ArrowUp')){
             this.game.player.setState(states.JUMPING, 1)
-        } else if (input.includes('Shift')){
+        } else if (input.includes('Shift') && this.game.fireAmmo > 15){
             this.game.player.setState(states.ROLLING, 2);
         }
     }
@@ -70,7 +70,7 @@ export class Jumping extends State{
     handleInput(input){
         if (this.game.player.vy > this.game.player.weight){
             this.game.player.setState(states.FALLING, 1);
-        } else if (input.includes('Shift')){
+        } else if (input.includes('Shift')  && this.game.fireAmmo > 15){
             this.game.player.setState(states.ROLLING, 2);
         } else if (input.includes('ArrowDown')){
             this.game.player.setState(states.DIVING, 0);
@@ -107,14 +107,19 @@ export class Rolling extends State{
         this.game.player.maxFrame = 6;
     }
     handleInput(input){
+
+        if (this.game.fireAmmo > 0) {
         this.game.particles.unshift(new Fire(this.game, this.game.player.x + this.game.player.width * 0.5, this.game.player.y + this.game.player.height * 0.5));
+        this.game.fireAmmo--;
+        }
         if (!input.includes('Shift') && this.game.player.onGround()){
             this.game.player.setState(states.RUNNING, 1);
-        }
-         else if (!input.includes('Shift') && !this.game.player.onGround()){
+        } else if (!input.includes('Shift') && !this.game.player.onGround()){
             this.game.player.setState(states.FALLING, 1);
         } else if (input.includes('Shift') && input.includes('ArrowUp') && this.game.player.onGround()) {
             this.game.player.vy -= 27;
+        } else if (input.includes('Shift') && this.game.fireAmmo === 0) {
+            this.game.player.setState(states.RUNNING, 1);
         } else if (input.includes('ArrowDown') && !this.game.player.onGround()){
             this.game.player.setState(states.DIVING, 0);
         }
@@ -133,13 +138,16 @@ export class Diving extends State{
 
     }
     handleInput(input){
+        if (this.game.fireAmmo > 0) {
         this.game.particles.unshift(new Fire(this.game, this.game.player.x + this.game.player.width * 0.5, this.game.player.y + this.game.player.height * 0.5));
+        this.game.fireAmmo--;
+        }
         if (this.game.player.onGround()){
             this.game.player.setState(states.RUNNING, 1);
             for (let i = 0; i < 30; i++) {
             this.game.particles.unshift( new Splash(this.game, this.game.player.x + this.game.player.width * 0.5, this.game.player.y + this.game.player.height))
             }
-        } else if (input.includes('Shift') && !this.game.player.onGround()){
+        } else if (input.includes('Shift') && !this.game.player.onGround() && this.game.fireAmmo > 15){
             this.game.player.setState(states.ROLLING, 2);
         } 
     }

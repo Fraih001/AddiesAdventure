@@ -7,7 +7,6 @@ export class Layer {
         this.image = image;
         this.x = 0;
         this.y = 0;
-
     }
     update(){
         if(this.x < -this.width) this.x = 0;

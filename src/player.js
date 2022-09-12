@@ -29,7 +29,8 @@ export class Player {
     update(input, deltaTime){
         this.checkCollision();
         this.currentState.handleInput(input);
-        //horizontal movement
+
+        // horizontal movement
         this.x += this.speed;
         if(input.includes('ArrowRight') && this.currentState !== this.states[6]) this.speed = this.maxSpeed;
         else if (input.includes('ArrowLeft')) this.speed = -this.maxSpeed;
@@ -38,11 +39,12 @@ export class Player {
         if (this.x < 0) this.x = 0;
         if ( this.x > this.game.width - this.width) this.x = this.game.width - this.width;
 
-        //vertical movement
+        // vertical movement
         this.y += this.vy;
         if (!this.onGround()) this.vy += this.weight;
         else this.vy = 0;
         if (this.y > this.game.height - this.height - this.game.groundMargin) this.y = this.game.height - this.height - this.game.groundMargin;
+        
         // sprite animation
         if (this.frameTimer > this.frameInterval) {
             this.frameTimer = 0;

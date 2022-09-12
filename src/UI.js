@@ -27,6 +27,12 @@ export class UI {
         context.drawImage(this.livesImage, 25 * i + 20, 95, 25, 25);
         }
 
+        // fire ammo
+        context.fillStyle = 'rgb(255,165,0, 0.6)';
+        for (let i = 0; i < this.game.fireAmmo; i++){
+            context.fillRect(1 * i + 20,140,1,20);
+        }
+
         // game over msg
         if (this.game.gameOver){
         if (this.game.score > this.game.winningScore){

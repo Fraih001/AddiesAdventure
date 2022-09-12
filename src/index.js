@@ -4,6 +4,8 @@ import { Background } from './background.js';
 import { FlyingEnemy, ClimbingEnemy, GroundEnemy} from './enemies.js';
 import { UI } from './UI.js';
 
+        // start menu + back to menu functionality
+
         function toggleGame(id, toggle){
             let element = document.getElementById(id);
             let display = toggle ? 'block' : 'none';
@@ -29,10 +31,7 @@ import { UI } from './UI.js';
             toggleStartScreen('canvas1', false);
         };
 
-        const canvas = document.getElementById('canvas1');
-        const ctx = canvas.getContext('2d');
-        canvas.width = 900;
-        canvas.height = 500;
+        // background music
 
         let audio = {
             mySound1: Object.assign(document.createElement('audio'), {
@@ -41,6 +40,13 @@ import { UI } from './UI.js';
             volume: 0.3,
             })};
         audio.mySound1.play();
+
+        // create canvas boiler plate
+
+        const canvas = document.getElementById('canvas1');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 900;
+        canvas.height = 500;
 
         class Game {
             constructor(width, height){
@@ -53,6 +59,10 @@ import { UI } from './UI.js';
                 this.player = new Player(this);
                 this.input = new InputHandler(this);
                 this.UI = new UI(this);
+                this.fireAmmo = 100;
+                this.maxFireAmmo = 200;
+                this.fireAmmoTimer = 0;
+                this.fireAmmoInterval = 20;
                 this.particles = [];
                 this.enemies = [];
                 this.collisions = [];
@@ -74,9 +84,15 @@ import { UI } from './UI.js';
                 this.lives = 5;
             }
             update(deltaTime){
+
+                // handle timer
                 this.time += deltaTime;
                 if(this.time > this.maxTime) this.gameOver = true;
+
+                // handle background
                 this.background.update();
+
+                // handle player
                 this.player.update(this.input.keys, deltaTime);
 
                 // handle enemies
@@ -111,7 +127,15 @@ import { UI } from './UI.js';
                 this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion);
                 this.particles = this.particles.filter(particle => !particle.markedForDeletion);
                 this.collisions = this.collisions.filter(collision => !collision.markedForDeletion);
-                this.floatingMessages = this.floatingMessages.filter(message => !message.markedForDeletion)
+                this.floatingMessages = this.floatingMessages.filter(message => !message.markedForDeletion);
+
+                //handle fire ammo
+                if(this.fireAmmoTimer > this.fireAmmoInterval){
+                    if(this.fireAmmo < this.maxFireAmmo) this.fireAmmo += 2;
+                    this.fireAmmoTimer = 0;
+                } else {
+                    this.fireAmmoTimer += deltaTime;
+                }
                 
             }
             draw(context){
@@ -156,6 +180,10 @@ import { UI } from './UI.js';
                     this.score = 0;
                     this.time = 0;
                     this.lives = 5;
+                    this.fireAmmo = 200;
+                    this.maxFireAmmo = 300;
+                    this.fireAmmoTimer = 0;
+                    this.fireAmmoInterval = 20;
                     this.gameOver = false;
                     this.reset = false;
                 }
@@ -169,6 +197,10 @@ import { UI } from './UI.js';
                     this.score = 0;
                     this.time = 0;
                     this.lives = 5;
+                    this.fireAmmo = 200;
+                    this.maxFireAmmo = 300;
+                    this.fireAmmoTimer = 0;
+                    this.fireAmmoInterval = 20;
                     this.gameOver = false;             
                     this.newGame = false;
                 }
@@ -176,12 +208,14 @@ import { UI } from './UI.js';
         }
 
         const game = new Game(canvas.width, canvas.height);
+
+        // main animation loop functionality + origin of deltaTime + context
         let lastTime = 0;
         
         function animate(timeStamp){
             const deltaTime = timeStamp - lastTime;
             lastTime = timeStamp;
-            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            // ctx.clearRect(0, 0, canvas.width, canvas.height)
             game.update(deltaTime);
             game.draw(ctx);
             requestAnimationFrame(animate);

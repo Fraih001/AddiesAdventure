@@ -8,6 +8,7 @@ class Enemy {
         this.markedForDeletion = false;
     }
     update(deltaTime){
+
         //movement 
         this.x -= this.speedX + this.game.speed;
         this.y += this.speedY;
@@ -18,6 +19,7 @@ class Enemy {
         } else {
             this.frameTimer += deltaTime;
         }
+
         // check if enemy off screen
         if (this.x + this.width < 0) this.markedForDeletion = true;
     }
@@ -46,7 +48,6 @@ export class FlyingEnemy extends Enemy {
         super.update(deltaTime);
         this.angle += this.va;
         this.y += Math.sin(this.angle);
-
     }
 }
 
